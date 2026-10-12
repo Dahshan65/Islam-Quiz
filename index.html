@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المسابقة الإسلامية الكبرى</title>
+<style>
+body {
+  margin: 0;
+  font-family: Tahoma, Arial, sans-serif;
+  background: linear-gradient(135deg,#073b2a,#12664b);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+.container {
+  max-width: 650px;
+  margin: 25px auto;
+  background: #fff;
+  color: #183b2d;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px #0005;
+}
+h1 { color: #b18a32; }
+button {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  background: #12664b;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+}
+button:hover { background: #0a4935; }
+#progress { color: #777; }
+#feedback { font-weight: bold; margin: 15px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏆 المسابقة الإسلامية الكبرى</h1>
+  <h3>اختبر معلوماتك في السيرة النبوية</h3>
+  <p>200 سؤال • مستويات متعددة • نقاط ونتائج</p>
+  <div id="start">
+    <p>هل أنت مستعد لاختبار معلوماتك؟</p>
+    <button onclick="startQuiz()">ابدأ المسابقة</button>
+  </div>
+  <div id="quiz" style="display:none">
+    <p id="progress"></p>
+    <h3 id="question"></h3>
+    <div id="answers"></div>
+    <p id="feedback"></p>
+    <button id="next" onclick="nextQuestion()" style="display:none">السؤال التالي ←</button>
+  </div>
+  <div id="result" style="display:none">
+    <h2>انتهت المسابقة</h2>
+    <h3 id="score"></h3>
+    <p id="message"></p>
+    <button onclick="location.reload()">إعادة المسابقة</button>
+  </div>
+</div>
+<script>
+const questions = [
+{q:"أين وُلِد النبي محمد ﷺ؟",a:["مكة المكرمة","المدينة المنورة","الطائف","القدس"],c:0},
+{q:"ما اسم والد النبي ﷺ؟",a:["أبو طالب","عبد الله","عبد المطلب","حمزة"],c:1},
+{q:"ما اسم والدة النبي ﷺ؟",a:["خديجة","حليمة","آمنة بنت وهب","فاطمة"],c:2},
+{q:"في أي عام وُلِد النبي ﷺ؟",a:["عام الفيل","عام الحزن","عام الوفود","عام الهجرة"],c:0},
+{q:"ما اسم جد النبي ﷺ؟",a:["أبو طالب","العباس","عبد المطلب","أبو سفيان"],c:2},
+{q:"من أول زوجات النبي ﷺ؟",a:["عائشة","حفصة","خديجة","سودة"],c:2},
+{q:"كم كان عمر النبي ﷺ عندما نزل عليه الوحي؟",a:["35 سنة","40 سنة","45 سنة","50 سنة"],c:1},
+{q:"في أي غار نزل الوحي أول مرة؟",a:["غار ثور","غار حراء","غار أحد","غار بدر"],c:1},
+{q:"من المَلَك الذي نزل بالوحي؟",a:["ميكائيل","إسرافيل","جبريل","ملك الموت"],c:2},
+{q:"ما أول ما نزل من القرآن الكريم؟",a:["الفاتحة","اقرأ باسم ربك","المدثر","الضحى"],c:1},
+{q:"من أول من آمن بالنبي ﷺ من النساء؟",a:["عائشة","خديجة","فاطمة","أم سلمة"],c:1},
+{q:"من أول من آمن بالنبي ﷺ من الصبيان؟",a:["عبد الله بن الزبير","علي بن أبي طالب","أنس بن مالك","عبد الله بن عمر"],c:1},
+{q:"من صاحب النبي ﷺ في الهجرة؟",a:["عمر بن الخطاب","علي بن أبي طالب","أبو بكر الصديق","عثمان بن عفان"],c:2},
+{q:"في أي غار اختبأ النبي ﷺ وأبو بكر أثناء الهجرة؟",a:["حراء","ثور","أحد","قباء"],c:1},
+{q:"إلى أي مدينة هاجر النبي ﷺ؟",a:["الطائف","بصرى","المدينة المنورة","القدس"],c:2},
+{q:"ما اسم المدينة المنورة قبل الهجرة؟",a:["يثرب","خيبر","تبوك","نجران"],c:0},
+{q:"ما أول مسجد بناه النبي ﷺ بعد الهجرة؟",a:["المسجد الحرام","المسجد النبوي","مسجد قباء","المسجد الأقصى"],c:2},
+{q:"ما أول غزوة كبرى بين المسلمين وقريش؟",a:["أحد","بدر","الخندق","حنين"],c:1},
+{q:"في أي سنة هجرية وقعت غزوة بدر؟",a:["الأولى","الثانية","الثالثة","الخامسة"],c:1},
+{q:"في أي سنة هجرية وقعت غزوة أحد؟",a:["الثانية","الثالثة","الرابعة","السادسة"],c:1},
+{q:"من الصحابي الذي أشار بحفر الخندق؟",a:["بلال بن رباح","سلمان الفارسي","أبو ذر الغفاري","خالد بن الوليد"],c:1},
+{q:"ما اسم مرضعة النبي ﷺ من بني سعد؟",a:["أم أيمن","حليمة السعدية","أم سلمة","صفية"],c:1},
+{q:"كم كان عمر النبي ﷺ عند وفاته؟",a:["60 سنة","63 سنة","65 سنة","70 سنة"],c:1},
+{q:"أين دُفن النبي ﷺ؟",a:["البقيع","مكة","حجرة عائشة بالمدينة","قباء"],c:2},
+{q:"ما اسم والد إبراهيم ابن النبي ﷺ؟",a:["أبو بكر","النبي محمد ﷺ","علي بن أبي طالب","عثمان بن عفان"],c:1}
+];
+
+let index = 0;
+let score = 0;
+let answered = false;
+
+function startQuiz() {
+  document.getElementById("start").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  showQuestion();
+}
+
+function showQuestion() {
+  answered = false;
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("next").style.display = "none";
+  document.getElementById("progress").textContent =
+    "السؤال " + (index + 1) + " من " + questions.length;
+  document.getElementById("question").textContent = questions[index].q;
+  const box = document.getElementById("answers");
+  box.innerHTML = "";
+  questions[index].a.forEach((answer, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = answer;
+    btn.onclick = () => checkAnswer(i, btn);
+    box.appendChild(btn);
+  });
+}
+
+function checkAnswer(choice, button) {
+  if (answered) return;
+  answered = true;
+  const q = questions[index];
+  if (choice === q.c) {
+    score++;
+    document.getElementById("feedback").textContent = "أحسنت! إجابة صحيحة ✓";
+    button.style.background = "#238636";
+  } else {
+    document.getElementById("feedback").textContent =
+      "إجابة غير صحيحة. الإجابة الصحيحة: " + q.a[q.c];
+    button.style.background = "#b42318";
+  }
+  document.getElementById("next").style.display = "block";
+  if (index === questions.length - 1) {
+    document.getElementById("next").textContent = "عرض النتيجة";
+  }
+}
+
+function nextQuestion() {
+  index++;
+  if (index < questions.length) {
+    showQuestion();
+  } else {
+    document.getElementById("quiz").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    document.getElementById("score").textContent =
+      "نتيجتك: " + score + " من " + questions.length;
+    document.getElementById("message").textContent =
+      score / questions.length >= 0.8 ? "ممتاز! معلوماتك قوية." :
+      score / questions.length >= 0.5 ? "جيد! واصل التعلم والمراجعة." :
+      "حاول مرة أخرى لتنمية معلوماتك.";
+  }
+}
+</script>
+</body>
+</html>
