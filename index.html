@@ -1,100 +1,119 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#123b2a">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f3d2c">
 <title>مسابقة السيرة النبوية الشريفة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+:root{--bg:#f3f1ea;--card:#fff;--ink:#1b2f26;--mut:#6a766f;--pri:#0f5a3f;--pri2:#16805a;--gold:#c9a24a;--line:#e3ded0;--soft:#f7f5ee;--ok:#d9f2e1;--okb:#1f8a4f;--bad:#fbe0e0;--badb:#c93b3b;--sh:0 8px 28px rgba(15,61,44,.10);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1612;--card:#15231d;--ink:#e8efe9;--mut:#93a39a;--pri:#2bb381;--pri2:#1f8a62;--gold:#e0bb62;--line:#25382f;--soft:#1a2b24;--ok:#173d2a;--okb:#3cc57f;--bad:#451d1d;--badb:#ef6a6a;--sh:0 8px 28px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#0d1612;--card:#15231d;--ink:#e8efe9;--mut:#93a39a;--pri:#2bb381;--pri2:#1f8a62;--gold:#e0bb62;--line:#25382f;--soft:#1a2b24;--ok:#173d2a;--okb:#3cc57f;--bad:#451d1d;--badb:#ef6a6a;--sh:0 8px 28px rgba(0,0,0,.4)}
 *{box-sizing:border-box}
-body{margin:0;background:#f4f0e5;color:#20372b;font-family:Tahoma,Arial,sans-serif;line-height:1.8}
-header{background:linear-gradient(135deg,#123b2a,#216044);color:white;text-align:center;padding:24px 12px;border-bottom:5px solid #c9a64c}
-h1{margin:0;font-size:clamp(23px,5vw,34px)}
-.byline{color:#f3d88c;font-size:18px;font-weight:bold;margin:7px 0}
-header p{margin:5px}
-.container{max-width:900px;margin:20px auto;padding:0 12px}
-.panel{background:white;border-radius:15px;padding:20px;margin-bottom:16px;box-shadow:0 4px 16px #00000010}
-h2{color:#175339;margin-top:0}
-button{font-family:inherit;font-size:15px;cursor:pointer;border:0;border-radius:9px;padding:11px 13px;margin:4px}
-.primary{background:#175339;color:white}
-.secondary{background:#e8dfc7;color:#243c2e}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.8;min-height:100%}
+.hero{background:radial-gradient(circle at 15% 0,#1c7a56 0,transparent 45%),linear-gradient(135deg,#0b3225,#145a41);color:#fff;text-align:center;padding:38px 16px 70px;position:relative;border-bottom:4px solid var(--gold)}
+.hero .bismillah{color:#f1d98f;font-size:18px;letter-spacing:.5px}
+.hero h1{margin:6px 0;font-size:clamp(26px,6vw,40px);font-weight:800}
+.hero p{margin:4px auto;max-width:620px;opacity:.92}
+.byline{display:inline-block;margin-top:10px;padding:4px 16px;border:1px solid #f1d98f88;border-radius:99px;color:#f1d98f;font-weight:700;font-size:15px}
+.wrap{max-width:980px;margin:-44px auto 0;padding:0 14px 30px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:var(--sh)}
+h2{margin:0 0 10px;color:var(--pri);font-size:22px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.stat{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.stat b{display:block;font-size:26px;color:var(--pri);line-height:1.3}
+.stat span{font-size:13px;color:var(--mut)}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--pri2));border-radius:99px;transition:width .3s}
+button{font:inherit;font-size:15px;cursor:pointer;border:0;border-radius:11px;padding:11px 16px;transition:transform .1s,filter .15s}
+button:hover:not(:disabled){filter:brightness(1.07)}button:active:not(:disabled){transform:scale(.98)}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.primary{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;font-weight:700}
+.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
 button:disabled{opacity:.5;cursor:not-allowed}
-.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
-.stage{border:1px solid #d8cfb6;background:#faf8f1;padding:12px 8px;border-radius:10px;text-align:center;min-width:0}
-.stage strong{display:block;line-height:1.7;overflow-wrap:anywhere}
-.stage small{display:block;color:#666;margin:5px 0}
-.stage button{width:100%;white-space:normal;line-height:1.7}
-.stage.locked{opacity:.65}
-.stage.done{border-color:#398258;background:#e9f6ec}
-.progress{height:10px;background:#e7e3d9;border-radius:10px;overflow:hidden;margin:12px 0}
-.progress div{height:100%;width:0;background:#c7a13e;transition:width .2s}
-.question{font-size:20px;font-weight:bold;margin:14px 0}
-.options{display:grid;gap:9px}
-.option{width:100%;text-align:right;background:#f6f4ed;border:1px solid #ddd4bd;color:#20372b;margin:0}
-.option.correct{background:#d8f1df;border:2px solid #23834b}
-.option.wrong{background:#f9dddd;border:2px solid #c33}
-.feedback{font-weight:bold;min-height:32px;margin:12px 0}
-.muted{color:#6d746d;font-size:14px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:16px}
+.stage{position:relative;border:1px solid var(--line);background:var(--soft);padding:16px;border-radius:15px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.stage .no{width:38px;height:38px;border-radius:50%;background:var(--pri);color:#fff;display:grid;place-items:center;font-weight:800}
+.stage strong{line-height:1.6;overflow-wrap:anywhere}
+.stage small{color:var(--mut)}
+.stage button{margin-top:auto;width:100%}
+.stage.locked{opacity:.6}.stage.locked .no{background:var(--mut)}
+.stage.done{border-color:var(--okb);background:var(--ok)}
+.stage.hard{border-color:var(--gold)}
+.tag{position:absolute;top:14px;left:14px;font-size:12px;background:var(--gold);color:#2a2108;border-radius:99px;padding:0 10px;font-weight:700}
+.qhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--mut);font-weight:600}
+.question{font-size:clamp(19px,3.6vw,25px);font-weight:800;margin:18px 0}
+.options{display:grid;gap:10px}
+.option{width:100%;text-align:right;background:var(--soft);border:1.5px solid var(--line);color:var(--ink);padding:14px 16px;font-weight:600}
+.option:hover:not(:disabled){border-color:var(--pri2)}
+.option.correct{background:var(--ok);border-color:var(--okb)}
+.option.wrong{background:var(--bad);border-color:var(--badb)}
+.feedback{font-weight:700;min-height:34px;margin:12px 0}
+.muted{color:var(--mut);font-size:14px}
 .hidden{display:none!important}
 .result{text-align:center}
-.score{font-size:40px;font-weight:bold;color:#175339}
-footer{text-align:center;padding:22px 12px;color:#59655c}
-.social a{display:inline-block;text-decoration:none;padding:8px 13px;margin:5px;border-radius:8px;background:#175339;color:white}
-.review-item{border-bottom:1px solid #e4dfd3;padding:12px 0}
-@media(max-width:480px){.panel{padding:14px}.question{font-size:18px}}
+.score{font-size:56px;font-weight:800;color:var(--pri);line-height:1.2}
+.review-item{border-bottom:1px solid var(--line);padding:12px 0}
+footer{text-align:center;padding:10px 12px 30px;color:var(--mut)}
+.social a{display:inline-block;text-decoration:none;padding:8px 16px;margin:5px;border-radius:10px;background:var(--pri);color:#fff;font-weight:600}
+@media(max-width:520px){.card{padding:16px}.stats{gap:6px}.stat b{font-size:21px}}
 </style>
 </head>
 <body>
-<header>
+<header class="hero">
+<div class="bismillah">بسم الله الرحمن الرحيم</div>
 <h1>مسابقة السيرة النبوية الشريفة</h1>
+<p>اختبر معرفتك بسيرة خير الخلق ﷺ ومواقف الصحابة رضي الله عنهم</p>
+<p>240 سؤالًا في 12 مرحلة، من الأساسيات إلى التحدي الأصعب</p>
 <div class="byline">إعداد وبرمجة: وائل دهشان</div>
-<p>اختبر معرفتك بالسيرة النبوية ومواقف الصحابة رضي الله عنهم</p>
-<p>200 سؤال في 10 مراحل — من الأساسيات إلى التحدي المتقدم</p>
 </header>
-
-<main class="container">
-<section id="home" class="panel">
-<h2>مرحبًا بك في المسابقة</h2>
-<p>تتكون المسابقة من 10 مراحل، في كل مرحلة 20 سؤالًا. تحتاج إلى 14 إجابة صحيحة على الأقل لاجتياز المرحلة وفتح المرحلة التالية.</p>
-<p class="muted">يُحفظ تقدمك على الجهاز والمتصفح نفسه.</p>
+<main class="wrap">
+<section id="home" class="card">
+<h2>مراحل المسابقة</h2>
+<p class="muted">في كل مرحلة 20 سؤالًا، وتحتاج إلى 14 إجابة صحيحة لاجتيازها وفتح التالية. يُحفظ تقدمك على هذا الجهاز.</p>
+<div class="stats">
+<div class="stat"><b id="stDone">0</b><span>مراحل مجتازة</span></div>
+<div class="stat"><b id="stOpen">1</b><span>المرحلة الحالية</span></div>
+<div class="stat"><b id="stPct">0%</b><span>نسبة الإنجاز</span></div>
+</div>
+<div class="bar"><i id="overall"></i></div>
 <div id="stages" class="stages"></div>
-<div style="text-align:center;margin-top:18px">
+<div class="actions">
 <button class="primary" onclick="startNext()">ابدأ أو تابع المسابقة</button>
 <button class="secondary" onclick="resetProgress()">إعادة ضبط التقدم</button>
 </div>
 </section>
-
-<section id="quiz" class="panel hidden">
-<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap">
-<strong id="stageLabel"></strong>
-<span id="questionNumber"></span>
-</div>
-<div class="progress"><div id="progressBar"></div></div>
+<section id="quiz" class="card hidden">
+<div class="qhead"><strong id="stageLabel"></strong><span id="questionNumber"></span></div>
+<div class="bar" style="margin:12px 0"><i id="progressBar"></i></div>
 <div id="scoreLabel" class="muted"></div>
 <div id="questionText" class="question"></div>
 <div id="options" class="options"></div>
 <div id="feedback" class="feedback" aria-live="polite"></div>
+<div class="actions" style="justify-content:flex-start">
 <button id="nextButton" class="primary hidden" onclick="nextQuestion()">السؤال التالي</button>
 <button class="secondary" onclick="goHome()">العودة إلى المراحل</button>
+</div>
 </section>
-
-<section id="result" class="panel result hidden">
+<section id="result" class="card result hidden">
 <h2 id="resultTitle"></h2>
 <div id="resultScore" class="score"></div>
 <p id="resultMessage"></p>
+<div class="actions">
 <button id="continueButton" class="primary" onclick="continueAfterResult()">متابعة</button>
 <button class="secondary" onclick="showReview()">مراجعة الإجابات</button>
 <button class="secondary" onclick="goHome()">العودة إلى المراحل</button>
+</div>
 </section>
-
-<section id="review" class="panel hidden">
+<section id="review" class="card hidden">
 <h2>مراجعة الإجابات</h2>
 <div id="reviewList"></div>
-<button class="primary" onclick="backToResult()">العودة إلى النتيجة</button>
+<div class="actions"><button class="primary" onclick="backToResult()">العودة إلى النتيجة</button></div>
 </section>
 </main>
-
 <footer>
 <div class="social">
 <a href="https://www.facebook.com/wael.dahshan.page/?locale=ar_AR" target="_blank" rel="noopener noreferrer">تابعنا على فيسبوك</a>
@@ -102,15 +121,10 @@ footer{text-align:center;padding:22px 12px;color:#59655c}
 </div>
 <p>إعداد وبرمجة: وائل دهشان</p>
 </footer>
-
 <script>
 "use strict";
-
-/* كل سؤال يتكون من: السؤال، الإجابة الصحيحة، وثلاثة خيارات */
 const stages = [
-{
-title:"المرحلة الأولى: البدايات",
-questions:[
+{title:"المرحلة الأولى: البدايات",questions:[
 ["أين وُلد النبي محمد ﷺ؟","مكة المكرمة","المدينة المنورة","الطائف","القدس"],
 ["إلى أي قبيلة ينتمي النبي ﷺ؟","قريش","ثقيف","الأوس","الخزرج"],
 ["ما اسم والد النبي ﷺ؟","عبد الله","عبد المطلب","أبو طالب","حمزة"],
@@ -130,12 +144,8 @@ questions:[
 ["من أم إبراهيم ابن النبي ﷺ؟","مارية القبطية","صفية بنت حيي","جويرية بنت الحارث","ميمونة بنت الحارث"],
 ["ما اسم ابنة النبي ﷺ التي كانت زوجة عثمان أولًا؟","رقية","فاطمة","زينب","أم كلثوم"],
 ["من عم النبي ﷺ الذي حماه في مكة ولم يسلم؟","أبو طالب","أبو لهب","أبو سفيان","أبو جهل"],
-["إلى أي دين دعا النبي ﷺ؟","الإسلام وتوحيد الله","عبادة الأصنام","عبادة الشمس","عبادة الملوك"]
-]
-},
-{
-title:"المرحلة الثانية: الدعوة في مكة",
-questions:[
+["إلى أي دين دعا النبي ﷺ؟","الإسلام وتوحيد الله","عبادة الأصنام","عبادة الشمس","عبادة الملوك"]]},
+{title:"المرحلة الثانية: الدعوة في مكة",questions:[
 ["من أول من آمن بالنبي ﷺ من النساء؟","خديجة بنت خويلد","عائشة بنت أبي بكر","حفصة بنت عمر","أم سلمة"],
 ["من أول من آمن من الصبيان على المشهور؟","علي بن أبي طالب","عبد الله بن عمر","أنس بن مالك","عبد الله بن عباس"],
 ["من أول من آمن من الرجال الأحرار على المشهور؟","أبو بكر الصديق","عمر بن الخطاب","عثمان بن عفان","أبو سفيان"],
@@ -155,12 +165,8 @@ questions:[
 ["من الصحابي الذي أرسله النبي ﷺ إلى المدينة ليعلّم الناس؟","مصعب بن عمير","خالد بن الوليد","عمرو بن العاص","أبو هريرة"],
 ["ما الاسم القديم للمدينة المنورة؟","يثرب","بكة","اليمامة","دومة الجندل"],
 ["ما الهدف الأساسي من الدعوة النبوية؟","عبادة الله وحده وإصلاح الناس","جمع المال","السيطرة على التجارة","طلب الشهرة"],
-["من الصحابي الذي اشتهر بأنه من السابقين إلى الإسلام وتحمّل التعذيب؟","خباب بن الأرت","أبو جهل","أمية بن خلف","أبو لهب"]
-]
-},
-{
-title:"المرحلة الثالثة: الهجرة النبوية",
-questions:[
+["من الصحابي الذي اشتهر بأنه من السابقين إلى الإسلام وتحمّل التعذيب؟","خباب بن الأرت","أبو جهل","أمية بن خلف","أبو لهب"]]},
+{title:"المرحلة الثالثة: الهجرة النبوية",questions:[
 ["من رافق النبي ﷺ في الهجرة إلى المدينة؟","أبو بكر الصديق","عمر بن الخطاب","عثمان بن عفان","علي بن أبي طالب"],
 ["في أي غار اختبأ النبي ﷺ وصاحبه أثناء الهجرة؟","غار ثور","غار حراء","غار أحد","غار بدر"],
 ["من نام في فراش النبي ﷺ ليلة الهجرة؟","علي بن أبي طالب","بلال بن رباح","زيد بن حارثة","سعد بن أبي وقاص"],
@@ -180,12 +186,8 @@ questions:[
 ["ما المدينة التي أصبحت مركز الدولة الإسلامية بعد الهجرة؟","المدينة المنورة","مكة قبل الفتح","الطائف","الحبشة"],
 ["ما اسم الوثيقة التي نظمت العلاقات بين جماعات المدينة؟","صحيفة المدينة","صلح الحديبية","كتاب المقوقس","عهد الفتح"],
 ["ما الغاية الأساسية من الهجرة النبوية؟","حماية الدعوة وإقامة مجتمع مسلم","السفر للتجارة فقط","طلب كنوز الروم","زيارة الطائف"],
-["ما الذي فعله سراقة في نهاية مطاردته للنبي ﷺ؟","رجع ولم يتمكن من القبض عليه","أسره وأعاده إلى مكة","رافق قريشًا إلى المدينة","دخل الغار"]
-]
-},
-{
-title:"المرحلة الرابعة: بناء المجتمع والغزوات",
-questions:[
+["ما الذي فعله سراقة في نهاية مطاردته للنبي ﷺ؟","رجع ولم يتمكن من القبض عليه","أسره وأعاده إلى مكة","رافق قريشًا إلى المدينة","دخل الغار"]]},
+{title:"المرحلة الرابعة: بناء المجتمع والغزوات",questions:[
 ["ما أول قبلة صلى إليها المسلمون؟","المسجد الأقصى","الكعبة منذ البداية","مسجد قباء","المسجد النبوي"],
 ["إلى أين تحولت القبلة بعد ذلك؟","الكعبة المشرفة","جبل أحد","بيت المقدس إلى الأبد","مسجد قباء"],
 ["ما المسجد الذي بناه النبي ﷺ في المدينة؟","المسجد النبوي","مسجد عمرو بن العاص","جامع دمشق","مسجد الكوفة"],
@@ -205,12 +207,8 @@ questions:[
 ["من أشار بحفر الخندق؟","سلمان الفارسي","بلال بن رباح","أبو هريرة","عبد الله بن مسعود"],
 ["ما الاسم الآخر لغزوة الخندق؟","غزوة الأحزاب","غزوة الفتح","غزوة العسرة","غزوة ذات الرقاع"],
 ["ما أبرز القبائل التي شاركت في الأحزاب ضد المسلمين؟","قريش وغطفان","الأوس وحدهم","الخزرج وحدهم","ثقيف وحدها"],
-["كيف انتهت غزوة الخندق؟","انصرف الأحزاب دون تحقيق هدفهم","حكم الأحزاب المدينة","انتصر الروم","هاجر المسلمون إلى الحبشة"]
-]
-},
-{
-title:"المرحلة الخامسة: المعاهدات والفتوحات",
-questions:[
+["كيف انتهت غزوة الخندق؟","انصرف الأحزاب دون تحقيق هدفهم","حكم الأحزاب المدينة","انتصر الروم","هاجر المسلمون إلى الحبشة"]]},
+{title:"المرحلة الخامسة: المعاهدات والفتوحات",questions:[
 ["في أي سنة هجرية وقعت غزوة الخندق؟","السنة الخامسة","السنة الثانية","السنة الثالثة","السنة التاسعة"],
 ["ما اسم الغزوة التي وقعت في السنة السادسة وانتهت بصلح؟","الحديبية","بدر","أحد","حنين"],
 ["إلى أين توجه النبي ﷺ مع أصحابه في الحديبية؟","للعمرة","لفتح الشام","للتجارة في اليمن","لزيارة الحبشة"],
@@ -229,13 +227,9 @@ questions:[
 ["ما السبب المباشر الذي أدى إلى فتح مكة؟","نقض حلفاء قريش صلح الحديبية","غزو الروم للمدينة","وفاة النجاشي","نزاع على سوق المدينة"],
 ["كيف تعامل النبي ﷺ مع كثير من أهل مكة يوم الفتح؟","عفا عن كثير منهم","أخلى مكة كلها","أحرق الكعبة","هدم جميع البيوت"],
 ["ماذا فعل النبي ﷺ بالأصنام حول الكعبة عند الفتح؟","أزالها","نقلها إلى المدينة","تركها في مكانها","أرسلها إلى الشام"],
-["ما الغزوة التي وقعت بعد فتح مكة؟","حنين","بدر","أحد","الخندق"],
-["ما الغزوة التي عُرفت أيضًا بغزوة العسرة؟","تبوك","بدر","خيبر","مؤتة"]
-]
-},
-{
-title:"المرحلة السادسة: الصحابة وأهل البيت",
-questions:[
+["في أي سنة هجرية وقعت غزوة حنين؟","السنة الثامنة","السنة الثانية","السنة الخامسة","السنة العاشرة"],
+["ما الغزوة التي عُرفت أيضًا بغزوة العسرة؟","تبوك","بدر","خيبر","مؤتة"]]},
+{title:"المرحلة السادسة: الصحابة وأهل البيت",questions:[
 ["من صاحب النبي ﷺ في الهجرة؟","أبو بكر الصديق","عمر بن الخطاب","عثمان بن عفان","علي بن أبي طالب"],
 ["من لُقّب بالفاروق؟","عمر بن الخطاب","أبو بكر الصديق","عثمان بن عفان","بلال بن رباح"],
 ["من لُقّب بذي النورين؟","عثمان بن عفان","علي بن أبي طالب","حمزة بن عبد المطلب","سعد بن معاذ"],
@@ -245,7 +239,7 @@ questions:[
 ["من الصحابي الذي لُقّب بأمين الأمة؟","أبو عبيدة بن الجراح","أبو جهل","أمية بن خلف","مسيلمة"],
 ["من الصحابي الذي جمع القرآن في عهد أبي بكر؟","زيد بن ثابت","أبو لهب","الوليد بن المغيرة","عتبة بن ربيعة"],
 ["من شاعر النبي ﷺ؟","حسان بن ثابت","أبو هريرة","بلال بن رباح","سراقة بن مالك"],
-["من نام في فراش النبي ﷺ ليلة الهجرة؟","علي بن أبي طالب","عمر بن الخطاب","طلحة بن عبيد الله","عبد الرحمن بن عوف"],
+["من الصحابي الذي بات في فراش النبي ﷺ ليلة الهجرة؟","علي بن أبي طالب","عمر بن الخطاب","طلحة بن عبيد الله","عبد الرحمن بن عوف"],
 ["من لُقّب بحبر الأمة وترجمان القرآن؟","عبد الله بن عباس","عبد الله بن عمر","أبو سفيان","سعد بن معاذ"],
 ["من خدم النبي ﷺ سنوات طويلة؟","أنس بن مالك","أبو جهل","أمية بن خلف","عتبة بن ربيعة"],
 ["من قائد الرماة في غزوة أحد؟","عبد الله بن جبير","أبو لهب","أبو سفيان","النجاشي"],
@@ -255,17 +249,13 @@ questions:[
 ["من زوجات النبي ﷺ التي كانت ابنة عمر؟","حفصة بنت عمر","صفية بنت حيي","سودة بنت زمعة","مارية القبطية"],
 ["من مؤذن النبي ﷺ المشهور في المدينة؟","بلال بن رباح","سلمان الفارسي","أبو ذر الغفاري","خباب بن الأرت"],
 ["من أشار على أبي بكر بجمع القرآن بعد اليمامة؟","عمر بن الخطاب","أبو جهل","أبو سفيان","خالد بن سعيد"],
-["من الصحابي الذي أنفق كثيرًا في تجهيز جيش العسرة؟","عثمان بن عفان","أبو لهب","أمية بن خلف","أبو جهل"]
-]
-},
-{
-title:"المرحلة السابعة: مواقف وأحداث",
-questions:[
+["من الصحابي الذي أنفق كثيرًا في تجهيز جيش العسرة؟","عثمان بن عفان","أبو لهب","أمية بن خلف","أبو جهل"]]},
+{title:"المرحلة السابعة: مواقف وأحداث",questions:[
 ["ما اسم المعاهدة التي عقدها النبي ﷺ مع قريش في السنة السادسة؟","صلح الحديبية","صحيفة المدينة","صلح الرملة","عهد تبوك"],
-["من الصحابي الذي قتل أبا جهل بعد أن أصيب في بدر؟","عبد الله بن مسعود أجهز عليه","بلال بن رباح وحده","سلمان الفارسي","أبو أيوب الأنصاري"],
+["من الصحابي الذي أجهز على أبي جهل بعد أن أصيب في بدر؟","عبد الله بن مسعود","بلال بن رباح","سلمان الفارسي","أبو أيوب الأنصاري"],
 ["ما اسم الرجل الذي كان يهوديًا ثم أسلم وصار من الصحابة؟","عبد الله بن سلام","أبو جهل","أمية بن خلف","الوليد بن المغيرة"],
 ["من الصحابي الذي أرسله النبي ﷺ إلى اليمن قاضيًا ومعلّمًا؟","معاذ بن جبل","أبو لهب","أبو سفيان","سراقة بن مالك"],
-["من الصحابي الذي كان أول سفير إلى المدينة؟","مصعب بن عمير","خالد بن الوليد","أبو هريرة","أبو جهل"],
+["من الصحابي الذي أرسله النبي ﷺ ليعلّم أهل المدينة قبل الهجرة؟","مصعب بن عمير","خالد بن الوليد","أبو هريرة","أبو جهل"],
 ["ما اسم الغزوة الكبرى الأولى في الإسلام؟","بدر","تبوك","حنين","مؤتة"],
 ["في أي غزوة استشهد حمزة بن عبد المطلب؟","أحد","بدر","الخندق","تبوك"],
 ["من زوجة أبي سفيان التي أسلمت بعد فتح مكة؟","هند بنت عتبة","أم جميل","أم أيمن","أسماء بنت أبي بكر"],
@@ -278,14 +268,10 @@ questions:[
 ["من الذي أعتق زيد بن حارثة وتبناه قبل تحريم التبني؟","النبي محمد ﷺ","أبو جهل","أمية بن خلف","النجاشي"],
 ["ما اسم ابن النبي ﷺ الذي توفي في صغره من خديجة؟","القاسم","أسامة","عبد الله بن عمر","معاوية"],
 ["ما اسم ابنة النبي ﷺ التي تزوجها علي بن أبي طالب؟","فاطمة رضي الله عنها","رقية رضي الله عنها","زينب رضي الله عنها","أم كلثوم رضي الله عنها"],
-["من الصحابي الذي اشتهر بفتح العراق والشام؟","خالد بن الوليد","أبو لهب","أبو جهل","أمية بن خلف"],
+["من الصحابي الذي اشتهر بفتوحات العراق والشام؟","خالد بن الوليد","أبو لهب","أبو جهل","أمية بن خلف"],
 ["ما اسم الصحابي الذي عُرف بذي الشهادتين؟","خزيمة بن ثابت","أبو هريرة","سلمان الفارسي","أنس بن مالك"],
-["من الصحابي الذي عُرف بأنه أول من رمى بسهم في سبيل الله؟","سعد بن أبي وقاص","أبو جهل","أمية بن خلف","أبو لهب"]
-]
-},
-{
-title:"المرحلة الثامنة: الرسائل والوفود",
-questions:[
+["من الصحابي الذي عُرف بأنه أول من رمى بسهم في سبيل الله؟","سعد بن أبي وقاص","أبو جهل","أمية بن خلف","أبو لهب"]]},
+{title:"المرحلة الثامنة: الرسائل والوفود",questions:[
 ["من إمبراطور الروم الذي أرسل إليه النبي ﷺ رسالة؟","هرقل","كسرى","النجاشي","المقوقس"],
 ["من ملك الفرس الذي أرسل إليه النبي ﷺ رسالة؟","كسرى","هرقل","النجاشي","المقوقس"],
 ["من حاكم مصر الذي أرسل إليه النبي ﷺ رسالة؟","المقوقس","هرقل","كسرى","النجاشي"],
@@ -305,12 +291,8 @@ questions:[
 ["ما اسم الغزوة التي عاد فيها النبي ﷺ من الشام دون قتال؟","تبوك","بدر","أحد","حنين"],
 ["من تولى قيادة المسلمين بعد استشهاد القادة الثلاثة في مؤتة؟","خالد بن الوليد","أبو بكر الصديق","عمر بن الخطاب","أبو عبيدة بن الجراح"],
 ["ما آخر غزوة خرج فيها النبي ﷺ؟","تبوك","بدر","أحد","حنين"],
-["ما المبدأ الذي أظهرته رسائل النبي ﷺ إلى الملوك؟","تبليغ الدعوة بالحكمة","فرض الإسلام على كل الشعوب بالقوة","قطع جميع العلاقات","ترك الدعوة خارج الجزيرة"]
-]
-},
-{
-title:"المرحلة التاسعة: الحج والسنوات الأخيرة",
-questions:[
+["ما المبدأ الذي أظهرته رسائل النبي ﷺ إلى الملوك؟","تبليغ الدعوة بالحكمة","فرض الإسلام على كل الشعوب بالقوة","قطع جميع العلاقات","ترك الدعوة خارج الجزيرة"]]},
+{title:"المرحلة التاسعة: الحج والسنوات الأخيرة",questions:[
 ["في أي سنة هجرية وقعت حجة الوداع؟","السنة العاشرة","السنة الثانية","السنة الخامسة","السنة الثامنة"],
 ["ما اسم الخطبة المشهورة التي ألقاها النبي ﷺ في حجه الأخير؟","خطبة حجة الوداع","خطبة بدر","خطبة الحديبية","خطبة تبوك"],
 ["ما أبرز ما أكده النبي ﷺ في خطبة الوداع؟","حرمة الدماء والأموال وحقوق الناس","فضل التجارة وحدها","إلغاء الصلاة","ترك الأخلاق"],
@@ -330,12 +312,8 @@ questions:[
 ["ما اسم ابن النبي ﷺ الذي توفي صغيرًا في المدينة؟","إبراهيم","زيد","أسامة","عبد الله بن عمر"],
 ["ما العبارة القرآنية التي تدل على ختم النبوة؟","خاتم النبيين","أول ملوك العرب","سيد قريش فقط","ملك المدينة"],
 ["ما المرجعان اللذان يُرجع إليهما في الهداية الإسلامية؟","كتاب الله وسنة رسوله","كتب الروم والفرس","الشعر والأنساب فقط","أعراف القبائل فقط"],
-["ما الرسالة الأساسية التي أكدها النبي ﷺ في حياته؟","توحيد الله ومكارم الأخلاق","التفاخر بالأنساب","جمع الأموال","التوسع في التجارة"]
-]
-},
-{
-title:"المرحلة العاشرة: التحدي المتقدم",
-questions:[
+["ما الرسالة الأساسية التي أكدها النبي ﷺ في حياته؟","توحيد الله ومكارم الأخلاق","التفاخر بالأنساب","جمع الأموال","التوسع في التجارة"]]},
+{title:"المرحلة العاشرة: التحدي المتقدم",questions:[
 ["من والد عبد الله بن الزبير؟","الزبير بن العوام","طلحة بن عبيد الله","سعد بن أبي وقاص","عبد الرحمن بن عوف"],
 ["من أول مولود للمهاجرين في المدينة على المشهور؟","عبد الله بن الزبير","أنس بن مالك","عبد الله بن عمر","محمد بن أبي بكر"],
 ["من الصحابي الذي أشار بحفر الخندق؟","سلمان الفارسي","صهيب الرومي","بلال بن رباح","أبو موسى الأشعري"],
@@ -346,277 +324,148 @@ questions:[
 ["من دليل النبي ﷺ في طريق الهجرة؟","عبد الله بن أريقط","سلمان الفارسي","بلال بن رباح","مصعب بن عمير"],
 ["من أول امرأة استشهدت في الإسلام؟","سمية بنت خياط","أسماء بنت أبي بكر","عائشة بنت أبي بكر","حفصة بنت عمر"],
 ["من الصحابي الذي اشتهر برواية الحديث وكان من أهل الصفة؟","أبو هريرة","أبو جهل","أبو لهب","الوليد بن المغيرة"],
-["ما اسم الغزوة التي حوصر فيها بنو قريظة بعد الأحزاب؟","بنو قريظة","بدر","خيبر","مؤتة"],
+["ما اسم الغزوة التي حوصر فيها اليهود بعد الأحزاب؟","بنو قريظة","بدر","خيبر","مؤتة"],
 ["من الذي حكم في بني قريظة بعد تحكيمهم له؟","سعد بن معاذ","سعد بن أبي وقاص","أبو عبيدة بن الجراح","خالد بن الوليد"],
 ["من الصحابي الذي كان من كتّاب الوحي وأُرسل في مهام تعليمية؟","زيد بن ثابت","أبو جهل","أمية بن خلف","أبو لهب"],
 ["من الصحابي الأنصاري المشهور بإكرام ضيفه؟","أبو طلحة الأنصاري","أبو جهل","أبو سفيان","أمية بن خلف"],
 ["من الصحابي الذي أشار إلى اختيار موضع الجيش عند ماء بدر؟","الحباب بن المنذر","أبو لهب","أبو جهل","عتبة بن ربيعة"],
 ["من كان قائد قريش العام في غزوة أحد؟","أبو سفيان بن حرب","بلال بن رباح","زيد بن ثابت","أبو هريرة"],
-["من الصحابي الذي لُقّب بذي الشهادتين؟","خزيمة بن ثابت","أبو هريرة","سلمان الفارسي","أنس بن مالك"],
-["من الصحابي الذي عُرف بأنه أول من رمى بسهم في سبيل الله؟","سعد بن أبي وقاص","أبو جهل","أمية بن خلف","أبو لهب"],
 ["من الصحابي الذي استشهد في بئر معونة وكان من قادة القراء؟","المنذر بن عمرو","أبو جهل","أبو سفيان","الوليد بن المغيرة"],
-["ما المنهج الصحيح عند دراسة تفاصيل السيرة المختلف فيها؟","الرجوع إلى المصادر الموثوقة وتمييز الصحيح من الضعيف","قبول كل قصة بلا تحقق","الاعتماد على القصص المتداولة فقط","رفض جميع كتب السيرة"]
-]
-}
+["من الصحابي الذي قال عنه النبي ﷺ: أقرؤهم أبيّ؟","أبي بن كعب","أبو جهل","أبو سفيان","أمية بن خلف"],
+["من الصحابي الذي لقّبه النبي ﷺ بحواري النبي؟","الزبير بن العوام","أبو جهل","أمية بن خلف","أبو لهب"],
+["ما المنهج الصحيح عند دراسة تفاصيل السيرة المختلف فيها؟","الرجوع إلى المصادر الموثوقة وتمييز الصحيح من الضعيف","قبول كل قصة بلا تحقق","الاعتماد على القصص المتداولة فقط","رفض جميع كتب السيرة"]]},
+{title:"المرحلة الحادية عشرة: التفاصيل الدقيقة",hard:1,questions:[
+["من قائد حملة الفيل على مكة؟","أبرهة الأشرم","النجاشي","ذو نواس","أبو رغال"],
+["كم كان عمر النبي ﷺ حين حكّم في وضع الحجر الأسود عند بناء قريش للكعبة؟","خمسة وثلاثون عامًا","خمسة وعشرون عامًا","ثلاثون عامًا","أربعون عامًا"],
+["ما الحلف الذي شهده النبي ﷺ قبل البعثة وأثنى عليه؟","حلف الفضول","حلف المطيبين","حلف الأحلاف","حلف الأحزاب"],
+["كم عدد النقباء الذين اختارهم النبي ﷺ في بيعة العقبة الثانية؟","اثنا عشر نقيبًا","سبعة","سبعون","ثلاثة"],
+["من المشرك الذي قُتل في سرية عبد الله بن جحش بنخلة؟","عمرو بن الحضرمي","أبو جهل","عتبة بن ربيعة","أمية بن خلف"],
+["ما أول غزوة غزاها النبي ﷺ بنفسه؟","الأبواء (ودّان)","بدر","بواط","العشيرة"],
+["من الصحابي الذي آخى النبي ﷺ بينه وبين عبد الرحمن بن عوف؟","سعد بن الربيع","سعد بن معاذ","أبو أيوب الأنصاري","أسيد بن حضير"],
+["ما أول قبيلة يهودية أُجليت عن المدينة؟","بنو قينقاع","بنو النضير","بنو قريظة","يهود خيبر"],
+["ما الغزوة التي اشتهر ذكر صلاة الخوف فيها؟","ذات الرقاع","ذات السلاسل","حنين","مؤتة"],
+["من قائد هوازن يوم حنين؟","مالك بن عوف النصري","أبو سفيان بن حرب","عكرمة بن أبي جهل","صفوان بن أمية"],
+["كم بلغ عدد جيش المسلمين تقريبًا يوم فتح مكة؟","عشرة آلاف","ثلاثة آلاف","ثلاثون ألفًا","سبعمئة"],
+["من الثلاثة الذين خُلّفوا في غزوة تبوك؟","كعب بن مالك","أبو ذر الغفاري","عثمان بن عفان","عبد الله بن أبي"],
+["ما المسجد الذي نُهي النبي ﷺ عن القيام فيه لأنه بُني ضرارًا؟","مسجد الضرار","مسجد قباء","مسجد القبلتين","مسجد الفتح"],
+["من الصحابي الذي قتل كعب بن الأشرف؟","محمد بن مسلمة","الزبير بن العوام","خالد بن الوليد","أبو دجانة"],
+["من زعيم المنافقين في المدينة؟","عبد الله بن أبي بن سلول","أبو عامر الراهب","كعب بن الأشرف","أمية بن خلف"],
+["في أي غزوة وقعت حادثة الإفك؟","بني المصطلق","أحد","تبوك","خيبر"],
+["من الصحابي الذي خذّل الأحزاب بين قريش وبني قريظة؟","نعيم بن مسعود","سلمان الفارسي","عمار بن ياسر","أبو سفيان"],
+["كم كان عدد من رجع مع عبد الله بن أبي قبل أحد؟","نحو ثلاثمئة","نحو مئة","نحو ألف","نحو خمسمئة"],
+["من الصحابي الذي أُسر يوم الرجيع وصُلب بمكة؟","خبيب بن عدي","عاصم بن ثابت","الحرام بن ملحان","مصعب بن عمير"],
+["من قائد سرية ذات السلاسل؟","عمرو بن العاص","خالد بن الوليد","أبو عبيدة بن الجراح","سعد بن أبي وقاص"]]},
+{title:"المرحلة الثانية عشرة: التحدي الأصعب",hard:1,questions:[
+["كم مدة الدعوة السرية قبل الجهر بها؟","ثلاث سنوات","سنة واحدة","خمس سنوات","عشر سنوات"],
+["كم استمر حصار قريش لبني هاشم في الشعب تقريبًا؟","ثلاث سنوات","سنة واحدة","سبع سنوات","أربعون يومًا"],
+["من الرجلان اللذان أرسلتهما قريش إلى النجاشي لاسترداد المهاجرين؟","عمرو بن العاص وعبد الله بن أبي ربيعة","أبو جهل وعتبة بن ربيعة","أبو سفيان وسهيل بن عمرو","الوليد بن المغيرة وأمية بن خلف"],
+["ما السورة التي تلاها جعفر بن أبي طالب أمام النجاشي؟","مريم","الكهف","يوسف","الفاتحة"],
+["من مفاوض قريش من ثقيف الذي رأى تعظيم الصحابة للنبي ﷺ يوم الحديبية؟","عروة بن مسعود الثقفي","سهيل بن عمرو","مكرز بن حفص","بديل بن ورقاء"],
+["كم كانت مدة الهدنة المتفق عليها في صلح الحديبية؟","عشر سنين","سنتان","خمس سنين","سنة واحدة"],
+["أي مما يلي ليس من العشرة المبشرين بالجنة؟","خالد بن الوليد","سعيد بن زيد","أبو عبيدة بن الجراح","الزبير بن العوام"],
+["كم بلغ عدد الغزوات التي خرج فيها النبي ﷺ بنفسه على المشهور؟","سبع وعشرون","عشر","سبع","أربعون"],
+["كم أقام النبي ﷺ بالمدينة بعد الهجرة؟","عشر سنين","ثلاث عشرة سنة","ثماني سنين","خمس عشرة سنة"],
+["من مؤلف كتاب زاد المعاد في هدي خير العباد؟","ابن القيم","ابن كثير","ابن هشام","الذهبي"],
+["عمّن نقل ابن هشام في تهذيبه سيرة النبي ﷺ؟","ابن إسحاق","الواقدي","ابن سعد","الطبري"],
+["من مؤلف الطبقات الكبرى؟","ابن سعد","ابن حجر","الواقدي","السهيلي"],
+["من مؤلف كتاب الروض الأنف في شرح السيرة؟","السهيلي","القاضي عياض","ابن عبد البر","البيهقي"],
+["من مؤلف كتاب الشفا بتعريف حقوق المصطفى؟","القاضي عياض","النووي","ابن حزم","الغزالي"],
+["من الغلامان الأنصاريان اللذان أثخنا أبا جهل في بدر؟","معاذ بن عمرو بن الجموح ومعاذ بن عفراء","عبد الله بن مسعود وبلال","سلمان وأبو أيوب","حمزة وعلي"],
+["كم كان عدد من بايعوا تحت الشجرة تقريبًا؟","ألف وأربعمئة","ثلاثمئة","سبعمئة","ثلاثة آلاف"],
+["في أي سنة هجرية فُرض صيام رمضان؟","السنة الثانية","السنة الأولى","السنة الرابعة","السنة السادسة"],
+["في أي سنة هجرية أُجلي بنو النضير على رواية ابن إسحاق؟","السنة الرابعة","السنة الثانية","السنة السادسة","السنة الثامنة"],
+["من الصحابي الذي أمره النبي ﷺ بتعلم كتابة اليهود ولغتهم؟","زيد بن ثابت","أبي بن كعب","معاذ بن جبل","علي بن أبي طالب"],
+["ما الاسم الآخر لغزوة بني المصطلق؟","غزوة المريسيع","غزوة بدر الموعد","غزوة حنين","غزوة مؤتة"]]}
 ];
 
-const PASS_MARK = 14;
-let currentStage = 0;
-let currentQuestion = 0;
-let score = 0;
-let answered = false;
-let answers = [];
-let lastResult = null;
-
-function loadProgress(){
-  try{
-    const saved = JSON.parse(localStorage.getItem("seerahQuizProgress") || "{}");
-    return {
-      unlocked: Number.isInteger(saved.unlocked) ? Math.min(9,Math.max(0,saved.unlocked)) : 0,
-      completed: Array.isArray(saved.completed) ? saved.completed.filter(n=>Number.isInteger(n)&&n>=0&&n<10) : []
-    };
-  }catch(e){
-    return {unlocked:0,completed:[]};
-  }
-}
-
-let progress = loadProgress();
-
-function saveProgress(){
-  try{
-    localStorage.setItem("seerahQuizProgress",JSON.stringify(progress));
-  }catch(e){}
-}
-
-function show(id){
-  ["home","quiz","result","review"].forEach(name=>{
-    document.getElementById(name).classList.toggle("hidden",name!==id);
-  });
-}
-
+const PASS_RATIO=0.7;
+let currentStage=0,currentQuestion=0,score=0,answered=false,answers=[],lastResult=null;
+const $=id=>document.getElementById(id);
+const need=()=>Math.ceil(stages[currentStage].questions.length*PASS_RATIO);
+function loadProgress(){try{const s=JSON.parse(localStorage.getItem("seerahQuizProgress")||"{}");return{unlocked:Number.isInteger(s.unlocked)?Math.min(stages.length-1,Math.max(0,s.unlocked)):0,completed:Array.isArray(s.completed)?s.completed.filter(n=>Number.isInteger(n)&&n>=0&&n<stages.length):[]}}catch(e){return{unlocked:0,completed:[]}}}
+let progress=loadProgress();
+function saveProgress(){try{localStorage.setItem("seerahQuizProgress",JSON.stringify(progress))}catch(e){}}
+function show(id){["home","quiz","result","review"].forEach(n=>$(n).classList.toggle("hidden",n!==id));window.scrollTo({top:0,behavior:"smooth"})}
 function renderStages(){
-  const el=document.getElementById("stages");
-  el.innerHTML="";
-
-  stages.forEach((stage,i)=>{
-    const done=progress.completed.includes(i);
-    const locked=i>progress.unlocked;
-
-    const card=document.createElement("div");
-    card.className="stage"+(done?" done":"")+(locked?" locked":"");
-
-    const title=document.createElement("strong");
-    title.textContent=stage.title;
-
-    const desc=document.createElement("small");
-    desc.textContent=done?"اجتزت المرحلة":locked?"أكمل المرحلة السابقة لفتحها":"20 سؤالًا";
-
-    const btn=document.createElement("button");
-    btn.className=locked?"secondary":"primary";
-
-    /* عنوان المرحلة كاملًا داخل كل زر */
-    btn.textContent=locked
-      ?"🔒 "+stage.title
-      :done
-        ?"↻ إعادة: "+stage.title
-        :"ابدأ: "+stage.title;
-
-    btn.disabled=locked;
-    btn.onclick=()=>startStage(i);
-
-    card.append(title,desc,btn);
-    el.appendChild(card);
-  });
-}
-
-function startNext(){
-  startStage(progress.unlocked);
-}
-
-function startStage(index){
-  if(index>progress.unlocked||index<0||index>=stages.length)return;
-  currentStage=index;
-  currentQuestion=0;
-  score=0;
-  answers=[];
-  answered=false;
-  show("quiz");
-  renderQuestion();
-}
-
-function renderQuestion(){
-  const stage=stages[currentStage];
-  const q=stage.questions[currentQuestion];
-
-  answered=false;
-  document.getElementById("stageLabel").textContent=stage.title;
-  document.getElementById("questionNumber").textContent=
-    "السؤال "+(currentQuestion+1)+" من "+stage.questions.length;
-  document.getElementById("progressBar").style.width=
-    (currentQuestion/stage.questions.length*100)+"%";
-  document.getElementById("scoreLabel").textContent="الإجابات الصحيحة: "+score;
-  document.getElementById("questionText").textContent=q[0];
-  document.getElementById("feedback").textContent="";
-  document.getElementById("nextButton").classList.add("hidden");
-
-  const opts=q.slice(1);
-  for(let i=opts.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [opts[i],opts[j]]=[opts[j],opts[i]];
-  }
-
-  const box=document.getElementById("options");
-  box.innerHTML="";
-  opts.forEach(text=>{
+  const el=$("stages");el.innerHTML="";
+  const n=progress.completed.length,pct=Math.round(n/stages.length*100);
+  $("stDone").textContent=n+" / "+stages.length;
+  $("stOpen").textContent=Math.min(progress.unlocked+1,stages.length);
+  $("stPct").textContent=pct+"%";$("overall").style.width=pct+"%";
+  stages.forEach((st,i)=>{
+    const done=progress.completed.includes(i),locked=i>progress.unlocked;
+    const c=document.createElement("div");
+    c.className="stage"+(done?" done":"")+(locked?" locked":"")+(st.hard?" hard":"");
+    const no=document.createElement("div");no.className="no";no.textContent=done?"✓":(i+1);
+    const t=document.createElement("strong");t.textContent=st.title.replace(/^[^:]*:\s*/,"");
+    const d=document.createElement("small");
+    d.textContent=done?"اجتزت المرحلة":locked?"أكمل المرحلة السابقة لفتحها":st.questions.length+" سؤالًا";
     const b=document.createElement("button");
-    b.className="option";
-    b.textContent=text;
-    b.onclick=()=>chooseAnswer(b,text,q);
-    box.appendChild(b);
+    b.className=locked?"secondary":"primary";
+    b.textContent=locked?"🔒 مغلقة":done?"إعادة المرحلة":"ابدأ المرحلة";
+    b.disabled=locked;b.onclick=()=>startStage(i);
+    c.append(no,t,d,b);
+    if(st.hard){const g=document.createElement("span");g.className="tag";g.textContent="صعب";c.appendChild(g)}
+    el.appendChild(c);
   });
 }
-
-function chooseAnswer(button,chosen,q){
-  if(answered)return;
-  answered=true;
-
-  const correct=q[1];
-  const isCorrect=chosen===correct;
-  if(isCorrect)score++;
-
-  answers.push({
-    question:q[0],
-    chosen:chosen,
-    correct:correct,
-    isCorrect:isCorrect
-  });
-
-  document.querySelectorAll(".option").forEach(b=>{
-    b.disabled=true;
-    if(b.textContent===correct)b.classList.add("correct");
-  });
-
-  if(!isCorrect)button.classList.add("wrong");
-
-  document.getElementById("feedback").textContent=
-    isCorrect?"إجابة صحيحة، أحسنت!":"الإجابة الصحيحة: "+correct;
-  document.getElementById("scoreLabel").textContent="الإجابات الصحيحة: "+score;
-  document.getElementById("progressBar").style.width=
-    ((currentQuestion+1)/stages[currentStage].questions.length*100)+"%";
-
-  document.getElementById("nextButton").textContent=
-    currentQuestion===stages[currentStage].questions.length-1
-      ?"عرض النتيجة":"السؤال التالي";
-
-  document.getElementById("nextButton").classList.remove("hidden");
+function startNext(){startStage(progress.unlocked)}
+function startStage(i){if(i>progress.unlocked||i<0||i>=stages.length)return;currentStage=i;currentQuestion=0;score=0;answers=[];answered=false;show("quiz");renderQuestion()}
+function renderQuestion(){
+  const st=stages[currentStage],q=st.questions[currentQuestion];answered=false;
+  $("stageLabel").textContent=st.title;
+  $("questionNumber").textContent="السؤال "+(currentQuestion+1)+" من "+st.questions.length;
+  $("progressBar").style.width=(currentQuestion/st.questions.length*100)+"%";
+  $("scoreLabel").textContent="الإجابات الصحيحة: "+score;
+  $("questionText").textContent=q[0];$("feedback").textContent="";
+  $("nextButton").classList.add("hidden");
+  const o=q.slice(1);
+  for(let i=o.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[o[i],o[j]]=[o[j],o[i]]}
+  const box=$("options");box.innerHTML="";
+  o.forEach(t=>{const b=document.createElement("button");b.className="option";b.textContent=t;b.onclick=()=>chooseAnswer(b,t,q);box.appendChild(b)});
 }
-
-function nextQuestion(){
-  if(!answered)return;
-
-  if(currentQuestion<stages[currentStage].questions.length-1){
-    currentQuestion++;
-    renderQuestion();
-  }else{
-    finishStage();
-  }
+function chooseAnswer(btn,chosen,q){
+  if(answered)return;answered=true;
+  const ok=chosen===q[1];if(ok)score++;
+  answers.push({question:q[0],chosen,correct:q[1],isCorrect:ok});
+  document.querySelectorAll(".option").forEach(b=>{b.disabled=true;if(b.textContent===q[1])b.classList.add("correct")});
+  if(!ok)btn.classList.add("wrong");
+  const len=stages[currentStage].questions.length;
+  $("feedback").textContent=ok?"إجابة صحيحة، أحسنت!":"الإجابة الصحيحة: "+q[1];
+  $("scoreLabel").textContent="الإجابات الصحيحة: "+score;
+  $("progressBar").style.width=((currentQuestion+1)/len*100)+"%";
+  $("nextButton").textContent=currentQuestion===len-1?"عرض النتيجة":"السؤال التالي";
+  $("nextButton").classList.remove("hidden");
 }
-
+function nextQuestion(){if(!answered)return;if(currentQuestion<stages[currentStage].questions.length-1){currentQuestion++;renderQuestion()}else finishStage()}
 function finishStage(){
-  const passed=score>=PASS_MARK;
-  lastResult={
-    stage:currentStage,
-    score:score,
-    passed:passed,
-    answers:answers.slice()
-  };
-
-  if(passed){
-    if(!progress.completed.includes(currentStage)){
-      progress.completed.push(currentStage);
-    }
-    if(currentStage<stages.length-1){
-      progress.unlocked=Math.max(progress.unlocked,currentStage+1);
-    }
-  }
-
+  const len=stages[currentStage].questions.length,passed=score>=need();
+  lastResult={stage:currentStage,score,passed,answers:answers.slice()};
+  if(passed){if(!progress.completed.includes(currentStage))progress.completed.push(currentStage);if(currentStage<stages.length-1)progress.unlocked=Math.max(progress.unlocked,currentStage+1)}
   saveProgress();
-
-  document.getElementById("resultTitle").textContent=
-    passed?"أحسنت! اجتزت المرحلة":"لم تجتز المرحلة بعد";
-  document.getElementById("resultScore").textContent=score+" / 20";
-  document.getElementById("resultMessage").textContent=passed
-    ?(currentStage===stages.length-1
-      ?"تهانينا! لقد أتممت جميع مراحل المسابقة."
-      :"لقد اجتزت المرحلة وفتحت المرحلة التالية.")
-    :"تحتاج إلى 14 إجابة صحيحة على الأقل. راجع إجاباتك ثم أعد المحاولة.";
-
-  document.getElementById("continueButton").textContent=
-    passed
-      ?(currentStage===stages.length-1?"عرض المراحل":"المرحلة التالية")
-      :"إعادة المرحلة";
-
+  const last=currentStage===stages.length-1;
+  $("resultTitle").textContent=passed?"أحسنت! اجتزت المرحلة":"لم تجتز المرحلة بعد";
+  $("resultScore").textContent=score+" / "+len;
+  $("resultMessage").textContent=passed?(last?"تهانينا! لقد أتممت جميع مراحل المسابقة.":"لقد اجتزت المرحلة وفتحت المرحلة التالية."):"تحتاج إلى "+need()+" إجابة صحيحة على الأقل. راجع إجاباتك ثم أعد المحاولة.";
+  $("continueButton").textContent=passed?(last?"عرض المراحل":"المرحلة التالية"):"إعادة المرحلة";
   show("result");
 }
-
-function continueAfterResult(){
-  if(!lastResult)return;
-
-  if(!lastResult.passed){
-    startStage(lastResult.stage);
-  }else if(lastResult.stage<stages.length-1){
-    startStage(lastResult.stage+1);
-  }else{
-    goHome();
-  }
-}
-
+function continueAfterResult(){if(!lastResult)return;if(!lastResult.passed)startStage(lastResult.stage);else if(lastResult.stage<stages.length-1)startStage(lastResult.stage+1);else goHome()}
 function showReview(){
-  if(!lastResult)return;
-
-  const list=document.getElementById("reviewList");
-  list.innerHTML="";
-
+  if(!lastResult)return;const l=$("reviewList");l.innerHTML="";
   lastResult.answers.forEach((a,i)=>{
-    const item=document.createElement("div");
-    item.className="review-item";
-
-    const q=document.createElement("strong");
-    q.textContent=(i+1)+". "+a.question;
-
-    const user=document.createElement("div");
-    user.textContent="إجابتك: "+a.chosen;
-    user.style.color=a.isCorrect?"#23834b":"#b32626";
-
-    const correct=document.createElement("div");
-    correct.textContent="الإجابة الصحيحة: "+a.correct;
-
-    item.append(q,user,correct);
-    list.appendChild(item);
+    const it=document.createElement("div");it.className="review-item";
+    const q=document.createElement("strong");q.textContent=(i+1)+". "+a.question;
+    const u=document.createElement("div");u.textContent="إجابتك: "+a.chosen;u.style.color=a.isCorrect?"var(--okb)":"var(--badb)";
+    const c=document.createElement("div");c.textContent="الإجابة الصحيحة: "+a.correct;
+    it.append(q,u,c);l.appendChild(it);
   });
-
   show("review");
 }
-
-function backToResult(){
-  show("result");
-}
-
-function goHome(){
-  renderStages();
-  show("home");
-}
-
-function resetProgress(){
-  if(!confirm("هل تريد حذف تقدمك وإعادة المسابقة من البداية؟"))return;
-  progress={unlocked:0,completed:[]};
-  saveProgress();
-  renderStages();
-  show("home");
-}
-
-renderStages();
-show("home");
+function backToResult(){show("result")}
+function goHome(){renderStages();show("home")}
+function resetProgress(){if(!confirm("هل تريد حذف تقدمك وإعادة المسابقة من البداية؟"))return;progress={unlocked:0,completed:[]};saveProgress();goHome()}
+renderStages();show("home");
 </script>
 </body>
 </html>
