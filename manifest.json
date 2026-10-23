@@ -1,0 +1,27 @@
+{
+  "name": "مسابقة السيرة النبوية الشريفة",
+  "short_name": "مسابقة السيرة",
+  "description": "240 سؤالًا في 12 مرحلة عن السيرة النبوية الشريفة ومواقف الصحابة رضي الله عنهم",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#312e81",
+  "theme_color": "#312e81",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
