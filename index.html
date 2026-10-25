@@ -15,7 +15,7 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,Arial,sans-serif;line-height:1.8;min-height:100%;font-size:12.8px;padding-bottom:calc(46px + env(safe-area-inset-bottom,0px));background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.13' stroke-width='1.4'%3E%3Crect x='16' y='16' width='32' height='32'/%3E%3Crect x='16' y='16' width='32' height='32' transform='rotate(45 32 32)'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3Cpath d='M0 0l8 8M64 0l-8 8M0 64l8-8M64 64l-8-8'/%3E%3C/g%3E%3C/svg%3E");background-size:64px 64px;background-attachment:fixed}
-.hero{background:radial-gradient(circle at 12% 10%,#ec4899aa 0,transparent 38%),radial-gradient(circle at 88% 0,#06b6d4aa 0,transparent 40%),linear-gradient(135deg,#052e24,#0f5a47 55%,#17806a);color:#fff;text-align:center;padding:38px 16px 74px;position:relative}
+.hero{background:radial-gradient(circle at 12% 10%,#f59e0b44 0,transparent 38%),radial-gradient(circle at 88% 0,#34d39955 0,transparent 40%),linear-gradient(135deg,#052e24,#0f5a47 55%,#17806a);color:#fff;text-align:center;padding:38px 16px 74px;position:relative}
 .hero:after{content:"";position:absolute;inset:auto 0 0 0;height:5px;background:linear-gradient(90deg,#f59e0b,#ec4899,#8b5cf6,#06b6d4,#10b981)}
 .hero .bismillah{color:#fde68a;font-size:14.4px}
 .hero h1{margin:6px 0;font-size:clamp(20.8px,4.8vw,32px);font-weight:800}
@@ -74,7 +74,13 @@ footer{text-align:center;padding:10px 12px 30px;color:#e6fff5}
 .social a:nth-child(1){background:#1877f2}
 .social a:nth-child(2){background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af)}
 @media(max-width:520px){.card{padding:16px}.stats{gap:6px}.stat b{font-size:16px}}
+
 .credit{position:fixed;bottom:0;left:0;right:0;z-index:999;text-align:center;font-weight:700;font-size:13px;color:#fff;background:rgba(5,46,36,.92);border-top:1px solid #ffffff33;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));backdrop-filter:blur(4px)}
+
+html,body{max-width:100%;overflow-x:hidden}
+.hero{padding:30px 16px 66px}
+.wrap{position:relative;z-index:1;width:100%;margin-top:-40px}
+.stats{grid-template-columns:repeat(3,minmax(0,1fr))}
 </style>
 </head>
 <body>
