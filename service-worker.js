@@ -1,4 +1,4 @@
-const CACHE = 'seerah-quiz-v1';
+const CACHE = 'seerah-quiz-v2';
 const CORE = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', e => {
